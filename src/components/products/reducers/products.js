@@ -1,4 +1,3 @@
-// users reducer
 export default function products(state = {}, action) {
     switch (action.type) {
         case 'PRODUCTS_LIST':

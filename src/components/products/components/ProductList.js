@@ -19,7 +19,12 @@ export default class ProductList extends React.Component {
         return (
             <div>
                 {
-                    products.map(product => <ProductItem key={product.id} product={product}/>)
+                    products.map(product =>
+                        <ProductItem key={product.id}
+                                     product={product}
+                                     onClickAddToCart = {() => this.props.addToCart(product.id)}
+
+                        />)
                 }
             </div>
 
