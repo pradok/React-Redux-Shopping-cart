@@ -5,15 +5,16 @@ import App from "./components/App";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 
-// build the router
+import ProductsContainer from "./components/products/container/ProductsContainer";
+
+
 const router = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
+      <IndexRoute component={ProductsContainer}/>
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>
 );
 
-// export
 export { router };
