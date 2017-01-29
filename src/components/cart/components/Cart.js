@@ -1,8 +1,7 @@
 import React, {PropTypes} from 'react'
 import Product from '../../../common/Product'
 
-const Cart = ({products, total}) => {
-    console.log('products', products);
+const Cart = ({products, total, customer}) => {
     const hasProducts = products && products.length > 0
     const nodes = hasProducts ? (
         products.map(product =>
@@ -10,6 +9,7 @@ const Cart = ({products, total}) => {
                 title={product.title}
                 price={product.price}
                 quantity={product.quantity}
+                priceReduced={product.priceReduced}
                 key={product.id}
             />
         )

@@ -5,16 +5,32 @@ import {getTotal, getCartProducts} from '../reducers'
 
 import Cart from '../components/cart/components/Cart'
 
-const CartContainer = ({products, total}) => (
-    <Cart
-        products={products}
-        total={total}
-    />
-)
+export class CartContainer extends React.Component {
+
+    componentWillMount() {
+        if (this.props.customerId) {
+            this.props.dispatch({
+                type: 'PRODUCT_CUSTOMER_DISCOUNTS',
+                customerId: this.props.customerId
+            });
+        }
+    }
+
+    render() {
+        const {products, total, customer} = this.props;
+        return (
+            <Cart
+                products={products}
+                total={total}
+                customer={customer}
+            />
+        );
+    }
+}
 
 CartContainer.propTypes = {
     products: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         quantity: PropTypes.number.isRequired
@@ -24,7 +40,8 @@ CartContainer.propTypes = {
 
 const mapStateToProps = (state) => ({
     products: getCartProducts(state),
-    total: getTotal(state)
+    total: getTotal(state),
+    customer: state.customer || {}
 })
 
 export default connect(

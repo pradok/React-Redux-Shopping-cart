@@ -5,17 +5,17 @@ export default class ApiProducts {
                 // mock products list as if from server.
                 let products = [
                     {
-                        id: 1,
+                        id: 'classic',
                         title: "Classic Ad",
                         price: 269.99
                     },
                     {
-                        id: 2,
+                        id: 'standout',
                         title: "Standout Ad",
                         price: 322.99
                     },
                     {
-                        id: 3,
+                        id: 'premium',
                         title: "Premium Ad",
                         price: 394.99
                     }
