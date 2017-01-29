@@ -9,7 +9,7 @@ export default class ProductList extends React.Component {
 
         console.log('this', this);
 
-        const {products} = this.props;
+        const {products} = this.props.products;
         if (products && !products.length) {
             return (
                 <div>Loading Products</div>

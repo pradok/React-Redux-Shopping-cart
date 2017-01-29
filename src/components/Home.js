@@ -5,13 +5,13 @@ import CartContainer from "../containers/CartContainer";
 
 // Home page component
 export default class Home extends React.Component {
-  // render
-  render() {
-    return (
-      <div className="page-home">
-        <ProductsContainer />
-        <CartContainer/>
-      </div>
-    );
-  }
+    render() {
+        console.log('Home this.props', this.props);
+        return (
+            <div className="page-home">
+                <ProductsContainer />
+                <CartContainer customerId={this.props.params.customerId} />
+            </div>
+        );
+    }
 }
