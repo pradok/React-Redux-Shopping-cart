@@ -18,19 +18,27 @@ export const reducers = combineReducers({
 const getAddedIds = state => fromCart.getAddedIds(state.cart)
 const getQuantity = (state, id) => fromCart.getQuantity(state.cart, id)
 const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
-const getReducedPrice = (state, id, qty) => fromCustomer.getReducedPrice(state, id, qty)
+const getReducedPrice = (state, id, qty, originalPrice) => fromCustomer.getReducedPrice(state, id, qty, originalPrice)
 
 export const getTotal = state => {
     console.log('getTotal state', state);
     // Iterate through all products added in cart.
     return getAddedIds(state)
         .reduce((total, id) => {
+                let originalPrice = getProduct(state, id).price;
                 // get the current qty from cart state
-                let reducedPrice = getReducedPrice(state, id, getQuantity(state, id));
+                let reducedPrice = getReducedPrice(state, id, getQuantity(state, id), originalPrice);
                 // get discounted price or use the original price from getProduct.
-                let price = reducedPrice ? reducedPrice : getProduct(state, id).price;
+                let price = reducedPrice ? reducedPrice : originalPrice;
 
-                return total + price * getQuantity(state, id)
+                if (price < 0) {
+                    // Negative price will reduce from the total (after the total is calculated.
+                    return (total + originalPrice * getQuantity(state, id)) + price
+                }
+                else {
+                    return total + price * getQuantity(state, id)
+                }
+
             },
             0
         )
@@ -42,6 +50,6 @@ export const getCartProducts = state => {
     return getAddedIds(state).map(id => ({
         ...getProduct(state, id),
         quantity: getQuantity(state, id),
-        priceReduced: getReducedPrice(state, id, getQuantity(state, id))
+        priceReduced: getReducedPrice(state, id, getQuantity(state, id), getProduct(state, id).price)
     }))
 }

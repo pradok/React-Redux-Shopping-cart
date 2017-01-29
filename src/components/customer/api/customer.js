@@ -6,14 +6,12 @@ export default class ApiCustomers {
                 let customerDiscounts = {
                     'unilever': {
                         'classic': {
-                            'deal': {
-                                3: 2
-                            }
+                            'trigger': 3
                         }
                     },
                     'apple': {
                         'standout': {
-                            'discount': 0.0712
+                            'price': 299.99
                         }
                     },
                     'nike': {
@@ -26,12 +24,10 @@ export default class ApiCustomers {
                     },
                     'ford': {
                         'classic': {
-                            'deal': {
-                                5: 4
-                            }
+                            'trigger': 5
                         },
                         'standout': {
-                            'discount': 0.040248
+                            'price': 309.99
                         },
                         'premium': {
                             'perAd': {
