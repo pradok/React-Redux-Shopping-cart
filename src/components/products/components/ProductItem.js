@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react'
+import CSSModules from 'react-css-modules';
+import styles from './productItem.scss'
 
 const ProductItem = ({product, onClickAddToCart}) => (
-    <div style={{marginBottom: 20}}>
+    <div styleName="product-item" style={{marginBottom: 20}}>
         <div>{product.title}, {product.price}</div>
         <button onClick={onClickAddToCart}>
             {'Add to cart'}
@@ -17,4 +19,4 @@ ProductItem.propTypes = {
     onClickAddToCart: PropTypes.func.isRequired
 }
 
-export default ProductItem
+export default CSSModules(ProductItem, styles);

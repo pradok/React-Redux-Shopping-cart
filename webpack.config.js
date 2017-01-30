@@ -28,7 +28,11 @@ module.exports = {
       {
         // https://github.com/jtangelder/sass-loader
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
+        loaders: [
+            'style?sourceMap',
+            'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+            'sass?sourceMap'
+        ],
       },
       {
         test: /\.css$/,
