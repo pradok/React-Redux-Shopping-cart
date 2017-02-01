@@ -1,28 +1,26 @@
 import React, {PropTypes} from "react";
+
+import styles from './productList.scss'
 import ProductItem from './ProductItem'
 
-
-// Home page component
 export default class ProductList extends React.Component {
-    // render
     render() {
-
-        console.log('this', this);
 
         const {products} = this.props.products;
         if (products && !products.length) {
             return (
-                <div>Loading Products</div>
+                <div className={`products-loading ${styles.productsLoading}`}>Loading Products</div>
             );
         }
 
         return (
             <div>
+                <h2>Ad packages</h2>
                 {
                     products.map(product =>
                         <ProductItem key={product.id}
                                      product={product}
-                                     onClickAddToCart = {() => this.props.addToCart(product.id)}
+                                     onClickAddToCart={() => this.props.addToCart(product.id)}
 
                         />)
                 }
