@@ -3,8 +3,9 @@ import styles from './productItem.scss'
 
 const ProductItem = ({product, onClickAddToCart}) => (
     <div className={`product-item ${styles.productItem}`}>
-        <div>{product.title}, {product.price}</div>
-        <button onClick={onClickAddToCart}>
+        <div>{product.title}</div>
+        <div>{product.price}</div>
+        <button className="add-cart-btn" onClick={onClickAddToCart}>
             {'Add to cart'}
         </button>
     </div>

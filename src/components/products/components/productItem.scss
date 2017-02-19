@@ -1,4 +1,22 @@
 .productItem {
   background: lightblue;
   margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  div {
+    padding: 5px
+  }
+  [class="add-cart-btn"] {
+    margin-top: 20px;
+  }
+}
+
+@media all and (max-width: 600px) {
+  [class*="__productItem"] {
+    padding: 10px;
+  }
+  [class="add-cart-btn"] {
+    margin-top: 0 !important;
+  }
+
 }

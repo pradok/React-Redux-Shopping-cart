@@ -4,6 +4,8 @@ var app_root = 'src'; // the app root folder: src, src_users, etc
 var path = require('path');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
+let autoprefixer = require('autoprefixer')
+
 module.exports = {
   app_root: app_root, // the app root folder, needed by the other webpack configs
   entry: [
@@ -31,14 +33,20 @@ module.exports = {
         loaders: [
             'style?sourceMap',
             'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-            'sass?sourceMap'
+            'sass?sourceMap',
+            'postcss'
         ],
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css'],
+        loaders: ['style', 'css', 'postcss'],
       }
     ],
+  },
+  postcss: () => {
+    return [
+      require('autoprefixer')
+    ];
   },
   devServer: {
     contentBase: __dirname + '/public',

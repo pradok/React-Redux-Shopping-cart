@@ -15,7 +15,7 @@ export const reducers = combineReducers({
     customer
 });
 
-const getAddedIds = state => fromCart.getAddedIds(state.cart)
+const getAddedSKUs = state => fromCart.getAddedSKUs(state.cart)
 const getQuantity = (state, id) => fromCart.getQuantity(state.cart, id)
 const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
 const getReducedPrice = (state, id, qty, originalPrice) => fromCustomer.getReducedPrice(state, id, qty, originalPrice)
@@ -23,7 +23,7 @@ const getReducedPrice = (state, id, qty, originalPrice) => fromCustomer.getReduc
 export const getTotal = state => {
     console.log('getTotal state', state);
     // Iterate through all products added in cart.
-    return getAddedIds(state)
+    return getAddedSKUs(state)
         .reduce((total, id) => {
                 let originalPrice = getProduct(state, id).price;
                 // get the current qty from cart state
@@ -47,7 +47,7 @@ export const getTotal = state => {
 
 
 export const getCartProducts = state => {
-    return getAddedIds(state).map(id => ({
+    return getAddedSKUs(state).map(id => ({
         ...getProduct(state, id),
         quantity: getQuantity(state, id),
         priceReduced: getReducedPrice(state, id, getQuantity(state, id), getProduct(state, id).price)
