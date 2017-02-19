@@ -17,9 +17,13 @@ const Cart = ({products, total, customer}) => {
         <em>Please add some Ad products.</em>
     )
 
+    const rulesDescription = customer.discounts.rulesDescription && customer.discounts.rulesDescription.length ? (customer.discounts.rulesDescription.map((rule, index) => <li key={index}>{rule}</li>)) : '';
+
+
     return (
         <div>
             <h3>Your Cart</h3>
+            <ul>{rulesDescription}</ul>
             <div>{nodes}</div>
             <p>Total: &#36;{total}</p>
         </div>

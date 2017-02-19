@@ -7,12 +7,22 @@ import Cart from '../components/cart/components/Cart'
 
 export class CartContainer extends React.Component {
 
+    getCustomerDiscounts(customerId) {
+        this.props.dispatch({
+            type: 'PRODUCT_CUSTOMER_DISCOUNTS',
+            customerId: customerId
+        });
+    }
+
     componentWillMount() {
         if (this.props.customerId) {
-            this.props.dispatch({
-                type: 'PRODUCT_CUSTOMER_DISCOUNTS',
-                customerId: this.props.customerId
-            });
+            this.getCustomerDiscounts(this.props.customerId);
+        }
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps.customerId !== this.props.customerId) {
+            this.getCustomerDiscounts(nextProps.customerId);
         }
     }
 
@@ -35,7 +45,7 @@ CartContainer.propTypes = {
         price: PropTypes.number.isRequired,
         quantity: PropTypes.number.isRequired
     })),
-    total: PropTypes.string,
+    total: PropTypes.string
 }
 
 const mapStateToProps = (state) => ({

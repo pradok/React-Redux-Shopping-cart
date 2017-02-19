@@ -47,6 +47,7 @@ export const getTotal = state => {
 
 
 export const getCartProducts = state => {
+    console.log('state', state);
     return getAddedSKUs(state).map(id => ({
         ...getProduct(state, id),
         quantity: getQuantity(state, id),
